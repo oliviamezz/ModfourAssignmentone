@@ -3,16 +3,17 @@
 //add, subtract, multiply, divide
 //user is prompted for input
 import java.util.Scanner;
+
 public class Runner {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         //instantiate a Calc object
         Calc myCalculator = new Calc();
-        //get user input for two numbers
         Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter the first number: ");
-        double n1 = scan.nextDouble();
-        System.out.println("Please enter the second number: ");
-        double n2 = scan.nextDouble();
+        double n1 = 0, n2 = 0;
+
+        //get user input for two numbers + getValidNum check for valid input
+        n1 = getValidNum(scan, "Please enter the first number: ");
+        n2 = getValidNum(scan, "Please enter the second number: ");
 
         //pass the numbers to the Calc object
         myCalculator.setNum1(n1);
@@ -35,4 +36,27 @@ public class Runner {
         System.out.println("The product is: " + myCalculator.multiply());
         System.out.println("The quotient is: " + myCalculator.divide());
     }
-}
+
+
+    private static double getValidNum(Scanner scan, String prompt) {
+        //establishes double number value
+        double number;
+        //while loop
+        //If user inputs numbers it will continue program, if not Invalid message appears
+        while (true) {
+            System.out.print(prompt);
+            if (scan.hasNextDouble()) {
+                number = scan.nextDouble();
+                scan.nextLine();
+                break;
+            } //if statement
+            //else for is input is invalid
+            else {
+                System.out.println("Invalid input. Please enter a number.");
+                scan.next();
+            }//ends else statement
+        }//ends while loop
+        return number;
+    }//ends getValidNum
+}//ends runner class
+
